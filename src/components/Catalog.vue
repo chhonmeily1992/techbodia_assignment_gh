@@ -48,24 +48,6 @@
 
                 <b-col lg="6" class="my-1">
                     <b-form-group
-                    label="Initial sort"
-                    label-for="initial-sort-select"
-                    label-cols-sm="3"
-                    label-align-sm="right"
-                    label-size="sm"
-                    class="mb-0"
-                    >
-                    <b-form-select
-                        id="initial-sort-select"
-                        v-model="sortDirection"
-                        :options="['asc', 'desc', 'last']"
-                        size="sm"
-                    ></b-form-select>
-                    </b-form-group>
-                </b-col>
-
-                <b-col lg="6" class="my-1">
-                    <b-form-group
                     label="Filter"
                     label-for="filter-input"
                     label-cols-sm="3"
@@ -85,29 +67,6 @@
                         <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
                         </b-input-group-append>
                     </b-input-group>
-                    </b-form-group>
-                </b-col>
-
-                <b-col lg="6" class="my-1">
-                    <b-form-group
-                    v-model="sortDirection"
-                    label="Filter On"
-                    description="Leave all unchecked to filter on all data"
-                    label-cols-sm="3"
-                    label-align-sm="right"
-                    label-size="sm"
-                    class="mb-0"
-                    v-slot="{ ariaDescribedby }"
-                    >
-                    <b-form-checkbox-group
-                        v-model="filterOn"
-                        :aria-describedby="ariaDescribedby"
-                        class="mt-1"
-                    >
-                        <b-form-checkbox value="name">Name</b-form-checkbox>
-                        <b-form-checkbox value="age">Age</b-form-checkbox>
-                        <b-form-checkbox value="isActive">Active</b-form-checkbox>
-                    </b-form-checkbox-group>
                     </b-form-group>
                 </b-col>
 
@@ -131,7 +90,7 @@
                     </b-form-group>
                 </b-col>
 
-                <b-col sm="7" md="6" class="my-1">
+                <b-col sm="7" md="12" class="my-1">
                     <b-pagination
                     v-model="currentPage"
                     :total-rows="totalRows"
@@ -162,24 +121,25 @@
                 >
 
                     <template #cell(flags)="row">
-                        <b-img :src=row.value.png rounded="circle" :alt=row.value.alt></b-img>    
+                        <b-img :src=row.value.png rounded="circle" width="50" height="50" :alt=row.value.alt></b-img>    
                     </template>
 
                     <template #cell(name)="row">
-                        {{ row.value.official }} 
+                        <a href="#" @click="info(row.item, row.index, $event.target)">
+                            {{ row.value.official }}
+                        </a> 
                     </template>
                     
                     <template #cell(nativeName)="row">
-                        {{ row.item.name.nativeName }} 
+                        {{ row.item.name.common }} 
                     </template>
-                    
-                    <template #cell(actions)="row">
-                        <b-button size="sm" @click="info(row.item, row.index, $event.target)" class="mr-1">
-                        Info modal
-                        </b-button>
-                        <b-button size="sm" @click="row.toggleDetails">
-                        {{ row.detailsShowing ? 'Hide' : 'Show' }} Details
-                        </b-button>
+
+                    <template #cell(altSpellings)="row">
+                        {{ row.item.altSpellings.toString() }} 
+                    </template>
+
+                    <template #cell(idd)="row">
+                        {{ row.item.idd.root }}{{ row.item.idd.suffixes.toString() }}  
                     </template>
 
                     <template #row-details="row">
@@ -214,8 +174,7 @@ export default {
                 { key: 'cca3', label: 'CCA3', sortable: false, class: 'text-center' },
                 { key: 'nativeName', label: 'Native Name' },
                 { key: 'altSpellings', label: 'Alternative Country Name', sortable: false, class: 'text-center' },
-                { key: 'idd', label: 'Country Calling Code', sortable: false, class: 'text-center' },
-                { key: 'actions', label: 'Actions' }
+                { key: 'idd', label: 'Country Calling Code', sortable: false, class: 'text-center' }
             ],
             totalRows: 1,
             currentPage: 1,
