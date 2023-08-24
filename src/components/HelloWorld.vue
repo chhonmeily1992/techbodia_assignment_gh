@@ -11,6 +11,16 @@ const count = ref(0)
 <template>
   <h1>{{ msg }}</h1>
 
+  <div class="container">
+    <b-jumbotron
+      header="Bootstrap-Vue"
+      lead="Bootstrap v4 Components for Vue.js 2"
+    >
+      <p>Now running on @vue/compat and Vue.js 3</p>
+      <b-button variant="primary" @click="showModal"> Click me! </b-button>
+    </b-jumbotron>
+  </div>
+
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
@@ -38,3 +48,14 @@ const count = ref(0)
   color: #888;
 }
 </style>
+
+<script>
+import { BIcon, BIconCamera } from 'bootstrap-vue';
+export default {
+  methods: {
+    showModal() {
+      this.$bvModal.msgBoxOk('Modal from @vue/compat');
+    },
+  },
+};
+</script>
