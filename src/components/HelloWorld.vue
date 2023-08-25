@@ -18,6 +18,9 @@ const count = ref(0)
     >
       <p>Now running on @vue/compat and Vue.js 3</p>
       <b-button variant="primary" @click="showModal"> Click me! </b-button>
+      <a href="https://vitejs.dev" target="_blank">
+        <img src="../assets/za.png" class="logo" alt="ZA" />
+      </a>
     </b-jumbotron>
   </div>
 
@@ -51,6 +54,7 @@ const count = ref(0)
 
 <script>
 import { BIcon, BIconCamera } from 'bootstrap-vue';
+
 export default {
   methods: {
     showModal() {
