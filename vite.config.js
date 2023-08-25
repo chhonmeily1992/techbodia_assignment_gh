@@ -8,6 +8,5 @@ export default defineConfig({
       vue: '@vue/compat',
     },
   },
-  plugins: [vue()],
-  base: '/vite-deploy-demo/'
+  plugins: [vue()]
 })
