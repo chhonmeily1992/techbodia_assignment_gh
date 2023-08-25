@@ -9,4 +9,5 @@ export default defineConfig({
     },
   },
   plugins: [vue()],
+  base: '/vite-deploy-demo/'
 })
