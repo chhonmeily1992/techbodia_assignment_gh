@@ -8,5 +8,6 @@ export default defineConfig({
       vue: '@vue/compat',
     },
   },
-  plugins: [vue()]
+  plugins: [vue()],
+  base: '/techbodia_assignment_gh/'
 })
