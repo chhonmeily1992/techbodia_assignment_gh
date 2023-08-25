@@ -153,7 +153,20 @@
 
                 <!-- Info modal -->
                 <b-modal :id="infoModal.id" :title="infoModal.title" ok-only @hide="resetInfoModal">
-                    <pre>{{ infoModal.content }}</pre>
+                    <b-card
+                        :title="infoModal.displayContent.name.common"
+                        :img-src="infoModal.displayContent.flags.png"
+                        :img-alt="infoModal.displayContent.flags.alt"
+                        img-top
+                        tag="article"
+                        style="max-width: 20rem;"
+                        class="mb-2"
+                    >
+                        <b-card-text>
+                            {{ infoModal.displayContent.flags.alt }}
+                        </b-card-text>
+                    </b-card>
+                    <!-- <pre>{{ infoModal.content }}</pre> -->
                 </b-modal>
             </b-container>
         </div>
@@ -215,6 +228,7 @@ export default {
         info(item, index, button) {
             this.infoModal.title = `Row index: ${index}`
             this.infoModal.content = JSON.stringify(item, null, 2)
+            this.infoModal.displayContent = item
             this.$root.$emit('bv::show::modal', this.infoModal.id, button)
         },
         resetInfoModal() {
